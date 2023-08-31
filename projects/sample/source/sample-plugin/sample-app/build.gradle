@@ -58,6 +58,7 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: 'libs_ad', include: ['*.jar', '*.aar'])
     //注意sample-host-lib要用compileOnly编译而不打包在插件中。在packagePlugin任务中配置hostWhiteList允许插件访问宿主的类。
     pluginCompileOnly project(":sample-host-lib")
     normalImplementation project(":sample-host-lib")

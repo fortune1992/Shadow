@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.tencent.shadow.sample.plugin.app.lib">
 
     <uses-feature android:glEsVersion="0x00020000" />
+    <uses-sdk tools:overrideLibrary="com.bytedance.ad.sdk.ad_mediation_sdk"/>
 
     <application
         android:name="com.tencent.shadow.sample.plugin.app.lib.UseCaseApplication"
