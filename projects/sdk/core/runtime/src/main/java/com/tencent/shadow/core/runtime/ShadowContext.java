@@ -126,6 +126,8 @@ public class ShadowContext extends SubDirContextThemeWrapper {
          */
         boolean startActivity(ShadowContext shadowContext, Intent intent, Bundle options);
 
+        boolean startActivities(ShadowContext shadowContext, Intent[] intents, Bundle options);
+
         /**
          * 启动Activity
          *
@@ -167,6 +169,11 @@ public class ShadowContext extends SubDirContextThemeWrapper {
     @android.annotation.TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public void superStartActivity(Intent intent, Bundle options) {
         super.startActivity(intent, options);
+    }
+
+    @android.annotation.TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public void superStartActivities(Intent[] intents, Bundle options) {
+        super.startActivities(intents, options);
     }
 
     @Override

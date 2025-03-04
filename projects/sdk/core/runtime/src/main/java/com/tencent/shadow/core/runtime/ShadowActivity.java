@@ -22,6 +22,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,6 +79,29 @@ public class ShadowActivity extends PluginActivity {
         final boolean success = mPluginComponentLauncher.startActivityForResult(hostActivityDelegator, pluginIntent, requestCode, options, callingActivity);
         if (!success) {
             hostActivityDelegator.startActivityForResult(intent, requestCode, options);
+        }
+    }
+
+    @Override
+    public void startActivities(Intent[] intents) {
+        this.startActivities(intents, null);
+    }
+
+    @Override
+    public void startActivities(Intent[] intents, Bundle options) {
+
+        final Intent[] pluginIntents = new Intent[intents.length];
+
+        for (int i = 0; i < intents.length; i++) {
+            Intent pluginIntent = new Intent(intents[i]);
+            pluginIntent.setExtrasClassLoader(mPluginClassLoader);
+            pluginIntents[i] = pluginIntent;
+        }
+
+        final boolean success = mPluginComponentLauncher.startActivities(this, pluginIntents, options);
+
+        if (!success) {
+            hostActivityDelegator.startActivities(intents, options);
         }
     }
 

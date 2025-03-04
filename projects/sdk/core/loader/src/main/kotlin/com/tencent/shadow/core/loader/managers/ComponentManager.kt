@@ -73,6 +73,21 @@ abstract class ComponentManager : PluginComponentLauncher {
         }
     }
 
+    override fun startActivities(
+        shadowContext: ShadowContext,
+        intents: Array<out Intent>,
+        options: Bundle?
+    ): Boolean {
+        val isPluginComponent = intents.find { !it.isPluginComponent() } == null
+        return if (isPluginComponent) {
+            shadowContext.superStartActivities(intents.map { it.toActivityContainerIntent() }
+                .toTypedArray(), options)
+            true
+        } else {
+            false
+        }
+    }
+
 
     override fun startActivityForResult(
         delegator: GeneratedHostActivityDelegator,
